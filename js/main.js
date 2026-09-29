@@ -666,11 +666,11 @@
   /* ---------- Page transition (exit) ---------- */
   var leaving = false;
   function normalizePath(p) {
-    if (!p) return "./";
+    if (!p) return "https://richestsoftsukhbir.github.io/papasampizza/";
     if (!/\/$/.test(p)) {
       p = /\.[a-z0-9]+$/i.test(p)
-        ? p.slice(0, p.lastIndexOf("./") + 1)
-        : p + "./";
+        ? p.slice(0, p.lastIndexOf("https://richestsoftsukhbir.github.io/papasampizza/") + 1)
+        : p + "https://richestsoftsukhbir.github.io/papasampizza/";
     }
     return p;
   }
@@ -689,7 +689,7 @@
       var wipe = document.createElement("div");
       wipe.className = "preloader wipe";
       wipe.innerHTML =
-        '<div class="preloader-inner"><img src="./images/hero-pizza.webp" alt=""><p>Firing up the oven…</p></div>';
+        '<div class="preloader-inner"><img src="https://richestsoftsukhbir.github.io/papasampizza/images/hero-pizza.webp" alt=""><p>Firing up the oven…</p></div>';
       document.body.appendChild(wipe);
       gsap.set(wipe, { yPercent: 100 });
       gsap
