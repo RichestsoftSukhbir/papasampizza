@@ -1,0 +1,125 @@
+/* ===== Papa Sam Pizza — tokens & base ===== */
+:root {
+    --red: #c8102e;
+    --red-dark: #9d0c24;
+    --navy: #1b2f86;
+    --navy-deep: #101c55;
+    --blue: #2a4fc4;
+    --cream: #fff8ec;
+    --cheese: #f7c948;
+    --white: #ffffff;
+    --ink: #10143a;
+    --muted: #5b6088;
+    --font-display: 'Alfa Slab One', 'Georgia', serif;
+    --font-body: 'Outfit', system-ui, sans-serif;
+    --radius: 28px;
+    --ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--cream);
+    max-width: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Clip horizontal overflow on html + body only — never on main/footer/any element
+   between them and .stack-card or .menu-filters-wrap, which would make that element
+   its own scroll container and break their position:sticky. */
+html, body { overflow-x: clip; }
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--red); color: #fff; }
+
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.05; letter-spacing: .5px; }
+.display-xl { font-size: clamp(3rem, 9vw, 8rem); }
+.display-lg { font-size: clamp(2.3rem, 5.5vw, 4.6rem); }
+.eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+    font-size: .8rem; color: var(--red);
+}
+.eyebrow::before { content: ''; width: 34px; height: 3px; background: currentColor; border-radius: 3px; }
+.text-red { color: var(--red); }
+.text-navy { color: var(--navy); }
+.text-cheese { color: var(--cheese); }
+.lead-muted { color: var(--muted); font-size: 1.15rem; line-height: 1.7; }
+
+.section { padding: clamp(4.5rem, 10vw, 9rem) 0; position: relative; }
+.section-navy { background: var(--navy-deep); color: #fff; }
+.section-red { background: var(--red); color: #fff; }
+.section-white { background: #fff; }
+.section-navy .eyebrow, .section-red .eyebrow { color: var(--cheese); }
+.section-navy .lead-muted, .section-red .lead-muted { color: rgba(255, 255, 255, .8); }
+
+/* Buttons */
+.btn-ps {
+    --bg: var(--red); --fg: #fff;
+    display: inline-flex; align-items: center; gap: .7rem;
+    padding: 1rem 1.8rem; border-radius: 100px; border: 0;
+    background: var(--bg); color: var(--fg); font-weight: 700; font-size: 1rem;
+    position: relative; overflow: hidden; cursor: pointer;
+    box-shadow: 0 10px 0 rgba(0, 0, 0, .18);
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.btn-ps:hover { transform: translateY(4px); box-shadow: 0 5px 0 rgba(0, 0, 0, .18); color: var(--fg); }
+.btn-ps:active { transform: translateY(10px); box-shadow: 0 0 0 rgba(0, 0, 0, .18); }
+.btn-ps.navy { --bg: var(--navy); }
+.btn-ps.cheese { --bg: var(--cheese); --fg: var(--ink); }
+.btn-ps.white { --bg: #fff; --fg: var(--red); }
+.btn-ps.wa { --bg: #1faa59; }
+.btn-ghost {
+    display: inline-flex; align-items: center; gap: .6rem; padding: 1rem 1.6rem;
+    border: 2px solid currentColor; border-radius: 100px; font-weight: 700;
+    transition: background .3s, color .3s;
+}
+.btn-ghost:hover { background: #fff; color: var(--red); border-color: #fff; }
+
+/* Marquee */
+.marquee { overflow: hidden; background: var(--cheese); color: var(--ink); padding: 1.1rem 0; transform: rotate(-1.2deg); margin: -1rem -4%; width: 108%; position: relative; z-index: 5; }
+.marquee-track { display: flex; width: max-content; gap: 3rem; font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2.4rem); text-transform: uppercase; white-space: nowrap; }
+.marquee-track span { display: inline-flex; align-items: center; gap: 3rem; }
+.marquee-track span::after { content: '🍕'; font-size: .8em; }
+.marquee-track { will-change: transform; }
+.marquee.navy { background: var(--navy); color: #fff; transform: rotate(1.2deg); }
+
+/* Reveal helpers (JS-controlled; visible if JS fails) */
+.js .reveal { opacity: 0; transform: translateY(50px); }
+.split-line { overflow: hidden; display: block; }
+.split-line > span { display: block; }
+
+/* Preloader */
+.preloader {
+    position: fixed; inset: 0; z-index: 9999; background: var(--red);
+    display: grid; place-items: center; color: #fff;
+}
+.preloader-inner { text-align: center; }
+.preloader img { width: 120px; margin: 0 auto 1rem; animation: spin 2.4s linear infinite; }
+.preloader p { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 2px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Custom cursor (desktop only) */
+.cursor { position: fixed; top: 0; left: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--red); pointer-events: none; z-index: 9998; mix-blend-mode: multiply; transform: translate(-50%, -50%); display: none; }
+@media (hover: hover) and (pointer: fine) { .cursor { display: block; } }
+
+/* Scroll progress */
+.progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 100%; background: linear-gradient(90deg, var(--red), var(--cheese), var(--blue)); transform-origin: left; transform: scaleX(0); z-index: 1100; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; }
+    .marquee-track, .preloader img { animation: none; }
+}
+
+/* Split-word wrappers (created by main.js) */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.wi { display: inline-block; }
