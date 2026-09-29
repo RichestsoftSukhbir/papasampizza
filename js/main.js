@@ -666,11 +666,11 @@
   /* ---------- Page transition (exit) ---------- */
   var leaving = false;
   function normalizePath(p) {
-    if (!p) return "/";
+    if (!p) return "./";
     if (!/\/$/.test(p)) {
       p = /\.[a-z0-9]+$/i.test(p)
-        ? p.slice(0, p.lastIndexOf("/") + 1)
-        : p + "/";
+        ? p.slice(0, p.lastIndexOf("./") + 1)
+        : p + "./";
     }
     return p;
   }
